@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myPage">
+	
+	<update id="updateImage" parameterType="MemberVO">
+		UPDATE `MEMBER`
+		   SET PROFILEIMG = #{profileimg}
+		 WHERE MEMBER_MAIL = #{member_mail}
+	</update>
+	
+	<select id="selectImage" parameterType="string" resultType="string">
+		SELECT PROFILEIMG
+		  FROM MEMBER
+		 WHERE MEMBER_MAIL = #{member_mail} 
+	</select>
+	
+	<update id="updateIntro" parameterType="MemberVO">
+		UPDATE `MEMBER`
+		   SET INTRODUCTION = #{introduction}
+		 WHERE MEMBER_MAIL = #{member_mail}
+	</update>
+
+	<update id="updatePass" parameterType="MemberVO">
+		UPDATE `MEMBER`
+		   SET PASSWORD = #{password}
+		 WHERE MEMBER_MAIL = #{member_mail}
+	</update>
+
+	<update id="updateNick" parameterType="MemberVO">
+		UPDATE `MEMBER`
+		   SET NICKNAME= #{nickname}
+		 WHERE MEMBER_MAIL = #{member_mail}
+	</update>
+
+</mapper>

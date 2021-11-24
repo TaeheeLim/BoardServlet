@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MEMBER">
+	<select id="checkMember" resultType="int" parameterType="string">
+		SELECT count(*) FROM `MEMBER`
+		WHERE MEMBER_MAIL = #{member_mail}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberVO">
+		INSERT INTO `MEMBER` 
+		(MEMBER_MAIL,FIRSTNAME,LASTNAME,NICKNAME,MEMBER_DATE,PASSWORD,REGEDENT_NUM)
+		VALUES (#{member_mail},#{firstname},#{lastname},#{nickname},SYSDATE(),#{password},#{regedent_num})
+	</insert>
+	
+	<select id="selectMember" parameterType="string" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE MEMBER_MAIL = #{member_mail}
+	</select>
+
+</mapper>

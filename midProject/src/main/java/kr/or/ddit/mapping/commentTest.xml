@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+
+
+<insert id="insertComment" parameterType="commentVO">
+	INSERT INTO COMMENT_TABLE(COMMENT_IDX,COMMENT_WRITER,COMMENT_CONTENT,COMMENT_DATE,COMMENT_NUMBER,BOARD_IDX)
+	VALUES(NULL,#{comment_writer},#{comment_content},SYSDATE(),0,#{board_idx})
+</insert>
+
+<delete id="deleteComment" parameterType="int">
+	DELETE FROM COMMENT_TABLE WHERE COMMENT_IDX = #{comment_idx}
+</delete>
+
+<update id="updateComment" parameterType="commentVO">
+	UPDATE COMMENT_TABLE 
+	   SET COMMENT_WRITER = #{comment_writer}, COMMENT_CONTENT = #{comment_content} 
+	 WHERE COMMENT_IDX = #{comment_idx}
+</update>
+
+<select id="selectComment" parameterType="int" resultType="commentVO">
+	SELECT * FROM COMMENT_TABLE WHERE BOARD_IDX = #{board_idx}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

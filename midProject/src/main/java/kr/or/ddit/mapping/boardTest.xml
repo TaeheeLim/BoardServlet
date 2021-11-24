@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BOARD">
+   <insert id="insertBoard" parameterType="BoardVO">
+      INSERT INTO `BOARD`
+      (BOARD_INDEX, MEMBER_MAIL, BOARD_DATE, BOARD_COUNT, BOARD_CONTENT, BOARD_TITLE)
+      VALUES (NULL, #{member_mail}, SYSDATE(), 0, #{board_content}, #{board_title})
+   </insert>
+   
+   <delete id="deleteBoard" parameterType="string">
+      DELETE FROM `BOARD`
+      WHERE BOARD_INDEX = #{board_index}
+   </delete>
+   
+   <update id="updateBoard" parameterType="BoardVO">
+      UPDATE `BOARD` 
+      SET BOARD_CONTENT = #{board_content}, BOARD_TITLE = #{board_title}
+      WHERE BOARD_INDEX = #{board_index}
+   </update>
+   
+   <update id="updateCount" parameterType="string">
+      UPDATE `BOARD` 
+      SET BOARD_COUNT = BOARD_COUNT + 1 
+        WHERE BOARD_INDEX = #{board_index}
+   </update>
+   
+   <select id="selectListBoard" resultType="BoardVO">
+      SELECT * FROM `BOARD`
+   </select>
+   
+   <select id="countTotalBoard" resultType="int">
+      SELECT COUNT(*) FROM `BOARD` WHERE BOARD_COUNT
+   </select>
+   
+   <select id="seeBoard" resultType="BoardVO">
+           SELECT BOARD_INDEX, MEMBER_MAIL, BOARD_DATE, BOARD_COUNT, BOARD_CONTENT, BOARD_TITLE
+           FROM `BOARD`
+            WHERE BOARD_INDEX = #{board_index}
+   </select>
+   
+   <select id="searchBoard" parameterType="map" resultType="BoardVO">
+		SELECT * FROM BOARD 
+		 WHERE ${state} LIKE '%'||#{value}||'%'
+		 ORDER BY BOARD_IDX DESC
+	</select>
+
+
+</mapper>
